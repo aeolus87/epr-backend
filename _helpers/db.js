@@ -1,27 +1,16 @@
-// _helpers/db.js
-
-const mongoose = require("mongoose");
+//_helpers/db.js
 require("dotenv").config();
-const uri = process.env.MONGO_URI;
+const mongoose = require("mongoose");
 
-if (!uri) {
-  console.error(
-    "MongoDB connection URI is not defined. Please set MONGO_URI in your environment variables."
-  );
-  process.exit(1);
-}
+const uri = process.env.MONGO_URI;
 
 mongoose
   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    console.log("MongoDB connected successfully");
-  })
   .catch((err) => {
     console.error("MongoDB connection error:", err);
     process.exit(1);
   });
 
-// Export your models
 module.exports = {
   Homepage: require("../homepage/homepage.model"),
 };
