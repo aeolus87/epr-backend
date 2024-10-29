@@ -1,4 +1,4 @@
-//server.js
+// server.js
 require("rootpath")();
 const express = require("express");
 const app = express();
@@ -6,9 +6,25 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const errorHandler = require("./_helpers/error-handler.js");
 
+const allowedOrigins = [
+  'https://epr-chi.vercel.app', 
+  'http://localhost:3000'       
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  optionsSuccessStatus: 200 
+};
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(corsOptions)); 
 
 // API routes
 app.use("/api/homepage", require("./homepage/homepage.controller"));
