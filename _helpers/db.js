@@ -1,12 +1,12 @@
 // _helpers/db.js
 
 const mongoose = require("mongoose");
-
+require("dotenv").config();
 const uri = process.env.MONGO_URI;
 
 if (!uri) {
   console.error(
-    "MongoDB connection URI is not defined. Please set MONGODB_URI in your environment variables."
+    "MongoDB connection URI is not defined. Please set MONGO_URI in your environment variables."
   );
   process.exit(1);
 }
