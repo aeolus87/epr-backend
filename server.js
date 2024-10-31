@@ -25,6 +25,7 @@ app.use(cors(corsOptions));
 
 // API routes
 app.use("/api/homepage", require("./homepage/homepage.controller"));
+app.use("/api/application", require("./application/application.controller"));
 
 // Global error handler
 app.use(errorHandler);
